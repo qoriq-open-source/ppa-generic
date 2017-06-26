@@ -1,6 +1,21 @@
 
-Release Notes for Primary Protected Application (PPA),
-a resident EL3 firmware.
+Release Notes for Primary Protected Application (PPA).
+
+PPA is an EL3 resident firmware for NXP QorIQ ARMv8 SoCs. It assists in core
+and platform initialization, provides standardized runtime services such as
+PSCI, and provides NXP-specific services.
+
+For build help:
+cd ppa
+./build help
+
+Example assuming gcc cross compiler from Ubuntu 16.04:
+export CROSS_COMPILE=aarch64-linux-gnu-
+./build rdb-fit all
+
+The result of a build is a FIT image, e.g. ./soc-ls2088/build/obj/ppa.itb.
+It must be placed in flash or the firmware area of an SD card per board-specific
+instructions.
 
 Services provided:
     EL3 initialization
@@ -24,6 +39,24 @@ Devices Supported:
     LS2088A
     LA1575
     LX2160
+
+Date: 06/29/2017 --------------------------------------------------------------
+
+1) Build methods from the soc folder level or the platform folder level using 
+   "make rdb" or "make rdb-fit" have been deprecated and are no longer supported.
+   Instead, build the ppa from the top level like this:
+    > cd ppa
+    > ./build rdb-fit ls2088
+
+   Multiple soc's can be built at the same time:
+    > ./build rdb-fit ls1043 ls1088 ls2088
+
+   All supported soc's can be built:
+    > ./build rdb-fit all
+
+2) top-level license file (license.txt) has been added.
+
+//- end 06/29/2017 update -----------------------------------------------------
 
 Date: 05/17/2017 --------------------------------------------------------------
 
